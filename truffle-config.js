@@ -30,60 +30,6 @@ module.exports = {
     }
   },
   networks: {
-    loom_dapp_chain: {
-      provider: function() {
-        const chainId = 'default'
-        const writeUrl = 'http://127.0.0.1:46658/rpc'
-        const readUrl = 'http://127.0.0.1:46658/query'
-        const mnemonicPath = path.join(__dirname, 'loom_mnemonic')
-        const privateKeyPath = path.join(__dirname, 'loom_private_key')
-        if (fs.existsSync(privateKeyPath)) {
-          const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl)
-          loomTruffleProvider.createExtraAccountsFromMnemonic("gravity top burden flip student usage spell purchase hundred improve check genre", 10)
-          return loomTruffleProvider
-        } else if (fs.existsSync(mnemonicPath)) {
-          const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        }
-      },
-      network_id: '*'
-    },
-    extdev_plasma_us1: {
-      provider: function() {
-        const chainId = 'extdev-plasma-us1'
-        const writeUrl = 'http://extdev-plasma-us1.dappchains.com:80/rpc'
-        const readUrl = 'http://extdev-plasma-us1.dappchains.com:80/query'
-        const mnemonicPath = path.join(__dirname, 'extdev_mnemonic')
-        const privateKeyPath = path.join(__dirname, 'extdev_private_key')
-        if (fs.existsSync(privateKeyPath)) {
-          const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl)
-          // use a dummy mnemonic to create a bunch of accounts we'll use for testing purposes
-          loomTruffleProvider.createExtraAccountsFromMnemonic("gravity top burden flip student usage spell purchase hundred improve check genre", 10)
-          return loomTruffleProvider
-        } else if (fs.existsSync(mnemonicPath)) {
-          const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        }
-      },
-      network_id: '9545242630824'
-    },
-    loom_mainnet: {
-      provider: function () {
-        const chainId = 'default'
-        const writeUrl = 'http://plasma.dappchains.com/rpc'
-        const readUrl = 'http://plasma.dappchains.com/query'
-        const mnemonicPath = path.join(__dirname, 'mainnet_mnemonic')
-        const privateKeyPath = path.join(__dirname, 'mainnet_private_key')
-        if (fs.existsSync(privateKeyPath)) {
-          const loomTruffleProvider = getLoomProviderWithPrivateKey(privateKeyPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        } else if (fs.existsSync(mnemonicPath)) {
-          const loomTruffleProvider = getLoomProviderWithMnemonic(mnemonicPath, chainId, writeUrl, readUrl)
-          return loomTruffleProvider
-        }
-      },
-      network_id: '*'
-    },
     rinkeby: {
       provider: function() {
         if (!process.env.INFURA_API_KEY) {

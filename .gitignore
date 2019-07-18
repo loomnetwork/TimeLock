@@ -1,4 +1,4 @@
 node_modules
 src/contracts
-extdev_private_key
 token_address
+rinkeby_private_key

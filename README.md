@@ -11,7 +11,7 @@ yarn install
 
 2. Create a new file called "token_address" and paste into it your token's address
 
-3. If you want to deploy to extdev, save your private key/mnemonic to a file called  `extdev_private_key`/`extdev_mnemonic`. For mainnet, use `mainnet_private_key`/`mainnet_mnemonic` instead.
+3. If you want to deploy to Rinkeby, save your private key/mnemonic to a file called  `rinkeby_private_key`/`rinkeby_mnemonic`.
 
 4. Compile the smart contract
 
@@ -19,10 +19,14 @@ yarn install
 truffle compile
 ```
 
+5. Export your Infura API KEY
+
+export INFURA_API_KEY=<YOUR INFURA API KEY>
+
 5. Deploy
 
 ```bash
-truffle deploy --network extdev_plasma_us1
+truffle deploy --network rinkeby
 ```
 
 
