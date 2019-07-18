@@ -21,7 +21,7 @@ truffle compile
 
 5. Export your Infura API KEY
 
-export INFURA_API_KEY=<YOUR INFURA API KEY>
+export INFURA_API_KEY=YOUR INFURA API KEY
 
 5. Deploy
 
