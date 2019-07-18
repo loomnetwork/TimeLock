@@ -48,6 +48,30 @@ module.exports = {
       network_id: 4,
       gasPrice: 15000000001,
       skipDryRun: true
+    },
+    mainnet: {
+      provider: function() {
+        if (!process.env.INFURA_API_KEY) {
+          throw new Error("INFURA_API_KEY env var not set")
+        }
+        const mnemonicPath = path.join(__dirname, 'mainnet_mnemonic')
+        const privateKeyPath = path.join(__dirname, 'mainnet_private_key')
+        if (fs.existsSync(privateKeyPath)) {
+          const privateKey = readFileSync(path.join(__dirname, 'mainnet_private_key'), 'utf-8')
+          return new PrivateKeyProvider(privateKey, `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`, 0, 10)
+        } else if (fs.existsSync(mnemonicPath)) {
+          const mnemonic = readFileSync(path.join(__dirname, 'mainnet_mnemonic'), 'utf-8')
+          return new HDWalletProvider(mnemonic, `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`, 0, 10)
+        }
+      },
+      network_id: 1,
+      skipDryRun: true
+    }
+  },
+  solc: {
+    optimizer: {
+        enabled: true,
+        runs: 200
     }
   },
   compilers: {
