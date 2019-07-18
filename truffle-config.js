@@ -1,26 +1,10 @@
 const { readFileSync } = require('fs')
 const path = require('path')
 const { join } = require('path')
-const LoomTruffleProvider  = require ('loom-truffle-provider')
 const HDWalletProvider = require('truffle-hdwallet-provider')
-const { sha256 } = require ('js-sha256')
-const { CryptoUtils } = require ('loom-js')
-const { mnemonicToSeedSync } = require ('bip39')
 const fs = require('fs')
 const PrivateKeyProvider = require("truffle-privatekey-provider");
 
-function getLoomProviderWithPrivateKey (privateKeyPath, chainId, writeUrl, readUrl) {
-  const privateKey = readFileSync(privateKeyPath, 'utf-8')
-  return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey)
-}
-
-function getLoomProviderWithMnemonic (mnemonicPath, chainId, writeUrl, readUrl) {
-  const mnemonic = readFileSync(mnemonicPath, 'utf-8').toString().trim()
-  const seed = mnemonicToSeedSync(mnemonic)
-  const privateKeyUint8ArrayFromSeed = CryptoUtils.generatePrivateKeyFromSeed(new Uint8Array(sha256.array(seed)))
-  const privateKeyB64 = CryptoUtils.Uint8ArrayToB64(privateKeyUint8ArrayFromSeed)
-  return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKeyB64)
-}
 
 module.exports = {
   contracts_build_directory: join(__dirname, './src/contracts'),
